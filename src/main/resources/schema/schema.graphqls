@@ -1,0 +1,42 @@
+type Query {
+  shows: [Show]
+  reviews: [Review]
+}
+
+type Mutation {
+  addReview(showId: ID!, starRating: Int!): Review
+  addShow(input: ShowInput!): Show
+}
+
+type Subscription {
+    stocks: Stock
+}
+
+extend type Mutation  {
+    uploadScriptWithMultipartPOST(input: Upload!): Boolean
+}
+
+input ShowInput {
+  title: String
+}
+
+type Show {
+  # The showId may or may not be there, depending on the scenario.
+  id: ID
+  title: String
+  reviews: [Review]
+}
+
+type Review {
+  id: ID
+  showId: ID
+  starRating: Int
+  show: Show
+}
+
+type Stock {
+    name: String
+    price: Float
+}
+
+scalar Upload
